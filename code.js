@@ -1,30 +1,42 @@
-function libraryFees()
-{
-    // get amount of days late and convert to a number
-var daysLate = parseInt(prompt("How many days late are your items?"));
+$(document).ready(
+    function ()
+    {
+        $("button").click(calculateTotal);
 
-    // get amount of books and convert
-var books = parseInt(prompt("How many books are you returning?"));
+        function calculateTotal() {
+            //Gather input for id="daysLate"
+            var daysLate = $("#daysLate").val();
+            daysLate = parseInt(daysLate);
 
-    // get amount of DVDs and convert
-var dvds = parseInt(prompt("How many DVDs are you returning?"));
+            //Gather input for id="books"
+            var books = $("#books").val();
+            books = parseInt(books);
 
-    // Multiply 0.25 by the amount of days (for book fee)
-var bookFeeCalculation = daysLate * 0.25;
+            //Gather input for id="dvds"
+            var dvds = $("#dvds").val();
+            dvds = parseInt(dvds);
 
-    // Multiply 0.50 by the amount of days (for DVD fee)
-var dvdFeeCalculation = daysLate * 0.50;
+            /*
+            PERFORM CALCULATIONS AND DISPLAY OUTPUT
+            */
 
-    // Multiply amount of books by its calculated late fee
-var bookFee = books * bookFeeCalculation;
+            //late fee for the books
+            var bookFee = daysLate*0.25*books;
 
-    // Multiply amount of DVDs by its calculated late fee
-var dvdFee = dvds * dvdFeeCalculation;
+            //late fee for dvds
+            var dvdFee = daysLate*0.50*dvds;
 
-    // Add both fees for total
-var totalFee = bookFee * dvdFee;
+            //total fee
+            var total = bookFee+dvdFee;
 
-var totalFeeDisplay = totalFee.toFixed(2);
+            //make sure it has two decimal places
+            var totalDisplay = total.toFixed(2);
 
-alert(`Your total fee is $${totalFeeDisplay}`);
-}
+            //update span text to total
+            $("#total").text(totalDisplay);
+
+            //unhide results
+            $(".output").show();
+        }
+    }
+)
